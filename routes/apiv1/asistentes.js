@@ -40,7 +40,6 @@ if (created) {
 
 // POST /apiv1/asistentes
 router.post('/', (req, res, next) => {
-  console.log("Este es el body" + req.body);
 // creamos un objeto de tipo Asitente
   const asistente = new Asistente(req.body);
 // lo guardamos en la base de datos
@@ -51,7 +50,6 @@ router.post('/', (req, res, next) => {
      res.json({ success: true, result: asistenteGuardado });
      
   });
-  //res.redirect('http://claudiaotger.com');
 });
 
 // PUT /apiv1/asitentes Actualizar Asistente
