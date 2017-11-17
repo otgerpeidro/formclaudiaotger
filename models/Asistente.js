@@ -6,11 +6,12 @@ const mongoose = require('mongoose');
 const asistenteSchema = mongoose.Schema({
     name: String,
     surname: String,
-    email: {
-        type: String//,
-       // index: true,
-       // unique: true
-    },
+    /*email: {
+        type: String,
+        index: true,
+        unique: true
+    },*/
+    email: String,
     phone: String,
     comment: String,
     created: {

@@ -40,19 +40,42 @@ if (created) {
 
 // POST /apiv1/asistentes
 router.post('/', (req, res, next) => {
-  console.log("123");
-  console.log("Este es el cuerpo " + req.body);
+  console.log("Este es el body" + req.body);
 // creamos un objeto de tipo Asitente
   const asistente = new Asistente(req.body);
 // lo guardamos en la base de datos
   asistente.save((err, asistenteGuardado) => {
      if (err) {
-       next(err);
-       return;
+       return next(err);
      }
      res.json({ success: true, result: asistenteGuardado });
+     
   });
-
+  //res.redirect('http://claudiaotger.com');
 });
+
+// PUT /apiv1/asitentes Actualizar Asistente
+router.put('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Asistente.update({_id: id}, req.body, (err, asistente) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: asistente });
+  });
+});
+
+// PUT /apiv1/asitentes Borrar Asistente
+
+router.delete('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Asistente.remove({_id: id}, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: result});
+  });
+});
+
 
 module.exports = router;

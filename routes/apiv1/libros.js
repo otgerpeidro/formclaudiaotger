@@ -52,7 +52,30 @@ router.post('/', (req, res, next) => {
      }
      res.json({ success: true, result: libroGuardado });
   });
+});
 
+
+// PUT /apiv1/asitentes Actualizar Libro
+router.put('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Libro.update({_id: id}, req.body, (err, libro) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: libro });
+  });
+});
+
+// PUT /apiv1/asitentes Borrar Libro
+
+router.delete('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Libro.remove({_id: id}, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: result});
+  });
 });
 
 module.exports = router;

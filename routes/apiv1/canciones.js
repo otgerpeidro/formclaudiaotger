@@ -55,4 +55,28 @@ router.post('/', (req, res, next) => {
 
 });
 
+
+// PUT /apiv1/asitentes Actualizar Canción
+router.put('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Musica.update({_id: id}, req.body, (err, cancion) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: cancion });
+  });
+});
+
+// PUT /apiv1/asitentes Borrar Canción
+
+router.delete('/:id', (req, res, next) => {
+  var id = req.params.id;
+  Musica.remove({_id: id}, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    res.json({ success: true, result: result});
+  });
+});
+
 module.exports = router;
