@@ -115,13 +115,13 @@
                           <div class="col-md-12 text-center">
                               <button type="submit" class="btn btn-primary btn-lg">&iexcl;Cuenta conmigo!</button>
                           </div>
+                        </div>
                           <div class="form-group">
-                            <div id="id01" class="col-md-12 text-center"></div>
-                          </div> 
-                      </div>
-                      
+                            <div id="assistant" class="col-md-12 text-center"></div>
+                          </div>            
                   </fieldset>
               </form>
+             
           </div>
       </div>
   </div>
@@ -145,6 +145,7 @@
   <!-- Funciones de GET y POST del formulario  -->
   <script>
    // GET
+  /*
       fetch('../apiv1/asistentes')
         .then(status)
         .then(json)
@@ -159,11 +160,11 @@
               out += '<p>' + data.result[key].name + ' ' + data.result[key].surname + '<p>';
             }
           }
-          document.getElementById("id01").innerHTML = out;
+          document.getElementById("assistant").innerHTML = out;
         }).catch(function(error) {
           console.log('Request failed', error);
         });
-
+       */
         // POST
       const handleFormSubmit = event => {          
           // Stop the form from submitting since we’re handling that with AJAX.
@@ -183,6 +184,19 @@
             .then(json)
             .then(function (data) {
                   console.log('Request succeeded with JSON response', data);
+                  //location.reload(true);
+                  document.getElementById("name").value = '';
+                  document.getElementById("surname").value = '';
+                  document.getElementById("phone").value = '';
+                  document.getElementById("email").value = '';
+                  document.getElementById("comment").value = '';
+                  if (data.success) { 
+                    document.getElementById("assistant").innerHTML = '<p> <b> ¡Muchas gracias, contamos contigo! </b> </p>';
+                   //location.reload(true);
+                   }else {
+                       document.getElementById("assistant").innerHTML = '<p> <b> Este email ya esta en la lista de invitados </b> </p>';
+                       console.log(data.success);
+                     }
               })
             .catch(function (error) {
                 console.log('Request failed', error);

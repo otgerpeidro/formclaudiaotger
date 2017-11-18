@@ -40,6 +40,7 @@ if (created) {
 
 // POST /apiv1/asistentes
 router.post('/', (req, res, next) => {
+  console.log(req.body);
 // creamos un objeto de tipo Asitente
   const asistente = new Asistente(req.body);
 // lo guardamos en la base de datos
