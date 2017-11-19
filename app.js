@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-require('./lib/connectMongoose');
+const db = require('./lib/connectMongoose');
 require('./models/Asistente');
 require('./models/Libro');
 require('./models/Musica');
@@ -31,9 +31,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Web
+app.use('/', require('./routes/index'));
 
-// Rutas de buestra aplicación
-app.use('/',                  require('./routes/index'));
+// API v1
 app.use('/apiv1/asistentes', require('./routes/apiv1/asistentes'));
 app.use('/apiv1/canciones', require('./routes/apiv1/canciones'));
 app.use('/apiv1/libros', require('./routes/apiv1/libros'));
