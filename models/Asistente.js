@@ -1,6 +1,8 @@
 "use strict";
 
 const mongoose = require('mongoose');
+const fs = require('fs');
+
 
 // primero definimos un esquema
 const asistenteSchema = mongoose.Schema({
@@ -29,6 +31,36 @@ asistenteSchema.statics.list = function (filter, limit, skip, fields, sort, call
   query.exec(callback);
 };
 
+
+/**
+ * carga un json de asistentes
+ */
+asistenteSchema.statics.cargaJson = async function (fichero) {
+    
+      // Use a callback function with async/await
+      const data = await new Promise((resolve, reject) => {
+        // Encodings: https://nodejs.org/api/buffer.html
+        fs.readFile(fichero, { encoding: 'utf8' }, (err, data) => {
+          return err ? reject(err) : resolve(data);
+        });
+      });
+    
+      console.log(fichero + ' leido.');
+    
+      if (!data) {
+        throw new Error(fichero + ' está vacio!');
+      }
+    
+      const asistentes = JSON.parse(data).asistentes;
+      const numAsistentes = asistentes.length;
+    
+      for (var i = 0; i < asistentes.length; i++) {
+        await (new Asistente(asistentes[i])).save();
+      }
+    
+      return numAsistentes;
+    
+    };
 
 
 

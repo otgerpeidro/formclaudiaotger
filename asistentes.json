@@ -1,0 +1,18 @@
+{
+    "asistentes": [
+      {
+        "name": "Claudia",
+        "surname": "Mena",
+        "email": "menaruf@gmail.com",
+        "phone": "657181322",
+        "comment": "Apuntada"
+      },
+      {
+        "name": "Otger",
+        "surname": "Peidro",
+        "email": "otgerpeidro@hotmail.com",
+        "phone": "639776421",
+        "comment": "Apuntado"
+      }
+    ]
+  }
