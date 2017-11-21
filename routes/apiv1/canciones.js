@@ -6,6 +6,9 @@ const Musica =  require('../../models/Musica');
 // no sería necesario requerir el modulo de Musica ya que podriamos recuperar el modelo con:
 // mongoose.model('Musica')
 
+// Auth con JWT
+const jwtAuth = require('../../lib/jwtAuth');
+router.use(jwtAuth());
 
 /* GET /apiv1/canciones */
 router.get('/', function(req, res, next) {

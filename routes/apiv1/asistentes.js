@@ -6,6 +6,10 @@ const Asistente =  require('../../models/Asistente');
 // no sería necesario requerir el modulo de Asistentes ya que podriamos recuperar el modelo con:
 // mongoose.model('Asistentes')
 
+// Auth con JWT
+const jwtAuth = require('../../lib/jwtAuth');
+router.use(jwtAuth());
+
 
 /* GET /apiv1/asistentes */
 router.get('/', function(req, res, next) {

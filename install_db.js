@@ -10,6 +10,8 @@ const db = require('./lib/connectMongoose');
 require('./models/Asistente');
 require('./models/Libro');
 require('./models/Musica');
+require('./models/Usuario');
+require('./models/PushToken');
 
 db.once('open', () => {
   const rl = readLine.createInterface({
@@ -34,7 +36,8 @@ function runInstallScript() {
   async.series([
       initAsistente,
       initLibro,
-      initMusica
+      initMusica,
+      initUsuarios
     ], (err) => {
       if (err) {
         console.error('Hubo un error: ', err);
@@ -105,4 +108,23 @@ function initLibro(cb) {
   
     });
   
+  }
+
+  function initUsuarios(cb) {
+    const Usuario = mongoose.model('Usuario');
+  
+    Usuario.remove({}, ()=> {
+  
+      const usuarios = [
+        { nombre: 'admin', email: 'otgerpeidro@hotmail.com', clave: 'Girona090618' }
+      ];
+  
+      async.eachSeries(usuarios, Usuario.createRecord, (err)=> {
+        if (err) return cb(err);
+  
+        console.log(`Se han cargado ${usuarios.length} usuarios.`);
+        return cb(null, usuarios.length);
+      });
+  
+    });
   }
