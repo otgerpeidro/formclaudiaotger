@@ -5,9 +5,9 @@ const hash = require('hash.js');
 const v = require('validator');
 
 const usuarioSchema = mongoose.Schema({
-  nombre: { type: String, index: true },
+  name: { type: String, index: true },
   email: { type: String, index: true },
-  clave: String
+  pass: String
 });
 
 usuarioSchema.statics.exists = function (idusuario, cb) {
@@ -20,20 +20,24 @@ usuarioSchema.statics.exists = function (idusuario, cb) {
 usuarioSchema.statics.createRecord = function (nuevo, cb) {
   // validaciones
   const valErrors = [];
-  if (!(v.isAlpha(nuevo.nombre) && v.isLength(nuevo.nombre, 2))) {
-    valErrors.push({ field: 'nombre', message: __('validation_invalid', { field: 'nombre' }) });
+  if (!(v.isAlpha(nuevo.name) && v.isLength(nuevo.name, 2))) {
+    valErrors.push({ field: 'name', message: __('validation_invalid', { field: 'name' }) });
+   
   }
 
   if (!v.isEmail(nuevo.email)) {
     valErrors.push({ field: 'email', message: __('validation_invalid', { field: 'email' }) });
+    
   }
 
-  if (!v.isLength(nuevo.clave, 6)) {
-    valErrors.push({ field: 'clave', message: __('validation_minchars', { num: '6' }) });
+  if (!v.isLength(nuevo.pass, 6)) {
+    valErrors.push({ field: 'pass', message: __('validation_minchars', { num: '6' }) });
+    
   }
 
   if (valErrors.length > 0) {
     return cb({ code: 422, errors: valErrors });
+    
   }
 
   // comprobar duplicados
@@ -46,12 +50,13 @@ usuarioSchema.statics.createRecord = function (nuevo, cb) {
     // el usuario ya existía
     if (user) {
       return cb({ code: 409, message: __('user_email_duplicated') });
+      
     } else {
 
       // Hago hash de la password
-      let hashedClave = hash.sha256().update(nuevo.clave).digest('hex');
+      let hashedClave = hash.sha256().update(nuevo.pass).digest('hex');
 
-      nuevo.clave = hashedClave;
+      nuevo.pass = hashedClave;
 
       // creo el usuario
       new Usuario(nuevo).save(cb);

@@ -4,16 +4,17 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
-const Usuario = mongoose.model('Usuario');
+const Usuario =  require('../../models/Usuario');
 
 const jwt = require('jsonwebtoken');
 const config = require('../../local_config');
 const hash = require('hash.js');
 
 router.post('/authenticate', function (req, res, next) {
-
+  
+    console.log(req.body);
   const email = req.body.email;
-  const clave = req.body.clave;
+  const pass = req.body.pass;
 
   // buscar el usuario
   Usuario.findOne({ email: email }, function (err, user) {
@@ -29,10 +30,12 @@ router.post('/authenticate', function (req, res, next) {
     } else if (user) {
 
       // hashear la candidata y comparar los hashes
-      const claveHash = hash.sha256().update(clave).digest('hex');
+      const claveHash = hash.sha256().update(pass).digest('hex');
 
       // la contraseña es la misma?
-      if (user.clave != claveHash) {
+      if (user.pass != claveHash) {
+          console.log(user.pass);
+          console.log(claveHash);
         return res.json({
           ok: false, error: {
             code: 401,
@@ -53,7 +56,8 @@ router.post('/authenticate', function (req, res, next) {
 
 });
 
-router.post('/register', function (req, res, next) {
+router.post('/register', (req, res, next) => {
+    console.log(req.body);
   Usuario.createRecord(req.body, function (err) {
     if (err) return next(err);
 

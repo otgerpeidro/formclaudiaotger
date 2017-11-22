@@ -7,9 +7,14 @@ var bodyParser = require('body-parser');
 const i18n = require('i18n');
 
 const db = require('./lib/connectMongoose');
+
+// Cargamos las definiciones de todos nuestros modelos
 require('./models/Asistente');
 require('./models/Libro');
 require('./models/Musica');
+require('./models/Usuario');
+require('./models/PushToken');
+
 
 var app = express();
 
@@ -32,6 +37,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// registrar lenguajes
+i18n.configure({
+  directory: __dirname + '/locales',
+  defaultLocale: 'en',
+  register: global
+});
+app.use(i18n.init);
+
+
 // Web
 app.use('/', require('./routes/index'));
 
@@ -39,6 +53,8 @@ app.use('/', require('./routes/index'));
 app.use('/apiv1/asistentes', require('./routes/apiv1/asistentes'));
 app.use('/apiv1/canciones', require('./routes/apiv1/canciones'));
 app.use('/apiv1/libros', require('./routes/apiv1/libros'));
+app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
+app.use('/apiv1/pushtokens', require('./routes/apiv1/pushtokens'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
