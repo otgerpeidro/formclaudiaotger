@@ -7,8 +7,8 @@ const Musica =  require('../../models/Musica');
 // mongoose.model('Musica')
 
 // Auth con JWT
-const jwtAuth = require('../../lib/jwtAuth');
-router.use(jwtAuth());
+//const jwtAuth = require('../../lib/jwtAuth');
+//router.use(jwtAuth());
 
 /* GET /apiv1/canciones */
 router.get('/', function(req, res, next) {

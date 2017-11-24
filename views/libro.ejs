@@ -130,6 +130,24 @@
 
    <!-- Funciones de GET y POST del formulario  -->
   <script>
+     // Comprueba si el usuario existe
+   /*  
+     fetch('../apiv1/usuarios/authenticate', {
+               method: 'post',
+               headers: {
+                   "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+               },   
+               body: formDataURLEncoded
+             })
+             .then(json)
+             .then(function (data) {
+                   console.log('Request succeeded with JSON response', data);
+                   location.reload(true);
+               })
+             .catch(function (error) {
+                 console.log('Request failed', error);
+               });
+   */
     // GET
        fetch('../apiv1/libros', {mode: 'no-cors'})
          .then(status)
