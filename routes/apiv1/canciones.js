@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 const Musica =  require('../../models/Musica');
+var cors = require('cors');
 // no sería necesario requerir el modulo de Musica ya que podriamos recuperar el modelo con:
 // mongoose.model('Musica')
 
@@ -10,7 +11,7 @@ const Musica =  require('../../models/Musica');
 //const jwtAuth = require('../../lib/jwtAuth');
 //router.use(jwtAuth());
 
-
+router.use(cors());
 
 /* GET /apiv1/canciones */
 router.get('/', function(req, res, next) {

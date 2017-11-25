@@ -3,13 +3,14 @@
 var express = require('express');
 var router = express.Router();
 const Libro =  require('../../models/Libro');
+var cors = require('cors');
 // no sería necesario requerir el modulo de Libro ya que podriamos recuperar el modelo con:
 // mongoose.model('Libro')
 // Auth con JWT
 //const jwtAuth = require('../../lib/jwtAuth');
 //router.use(jwtAuth());
 
-
+router.use(cors());
 
 /* GET /apiv1/libros */
 router.get('/', function(req, res, next) {
