@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 const i18n = require('i18n');
 
@@ -45,6 +46,15 @@ i18n.configure({
 });
 app.use(i18n.init);
 
+app.use(cors());
+
+
+
+/*
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+});
+*/
 
 // Web
 app.use('/', require('./routes/index'));

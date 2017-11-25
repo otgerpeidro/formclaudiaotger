@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 const Asistente =  require('../../models/Asistente');
+var cors = require('cors');
 // no sería necesario requerir el modulo de Asistentes ya que podriamos recuperar el modelo con:
 // mongoose.model('Asistentes')
 
@@ -10,6 +11,7 @@ const Asistente =  require('../../models/Asistente');
 // const jwtAuth = require('../../lib/jwtAuth');
 // router.use(jwtAuth());
 
+router.use(cors());
 
 /* GET /apiv1/asistentes */
 router.get('/', function(req, res, next) {
