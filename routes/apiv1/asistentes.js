@@ -8,8 +8,8 @@ var cors = require('cors');
 // mongoose.model('Asistentes')
 
 // Auth con JWT
-// const jwtAuth = require('../../lib/jwtAuth');
-// router.use(jwtAuth());
+ const jwtAuth = require('../../lib/jwtAuth');
+ router.use(jwtAuth());
 
 router.use(cors());
 
