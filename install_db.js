@@ -116,7 +116,7 @@ function initLibro(cb) {
     Usuario.remove({}, ()=> {
   
       const usuarios = [
-        { name: 'admin', email: 'otgerpeidro@hotmail.com', pass: 'Girona090618' }
+        { }
       ];
   
       async.eachSeries(usuarios, Usuario.createRecord, (err)=> {
