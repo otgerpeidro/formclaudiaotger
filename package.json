@@ -28,7 +28,7 @@
   },
   "main": "app.js",
   "devDependencies": {
-    "jscs": "^2.1.1",
+    "jscs": "^3.0.7",
     "jshint": "^2.8.0"
   },
   "author": "",
